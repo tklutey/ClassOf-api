@@ -2,8 +2,10 @@
   "name": "classof-api",
   "version": "1.0.0",
   "description": "API to serve resources for C190 alumni database",
-  "main": "index.js",
-  "scripts": {},
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tklutey/ClassOf-api.git"
@@ -17,5 +19,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "mongoose": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }
