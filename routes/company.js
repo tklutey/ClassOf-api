@@ -11,7 +11,7 @@ function postCompany(req, res) {
             res.json({
                 success: false
             });
-            console.log('Error saving post');
+            console.log('Error saving company');
             console.log(err);
         } else {
             res.json({

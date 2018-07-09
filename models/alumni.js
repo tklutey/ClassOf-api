@@ -1,13 +1,30 @@
 const mongoose = require('mongoose');
 
-const alumniSchema = mongoose.Schema({
-  firstName: {
+var locationSchema = mongoose.Schema({
+  country: {
     type: String,
     required: true
   },
-  lastName: {
+  state: {
     type: String,
     required: true
+  },
+  city: {
+    type: String, 
+    required: true
+  }
+})
+
+const alumniSchema = mongoose.Schema({
+  firstName: {
+    type: [String],
+    required: true,
+    index: true
+  },
+  lastName: {
+    type: [String],
+    required: true,
+    index: true
   },
   classYear: {
     type: Number,
@@ -19,8 +36,8 @@ const alumniSchema = mongoose.Schema({
   education: [
     {
       school: {
-        type: Schema.Types.ObjectId,
-        ref: 'School'
+        type: String,
+        required: true
       },
       gradYear: {
         type: Number,
@@ -33,8 +50,8 @@ const alumniSchema = mongoose.Schema({
   jobs: [
     {
       employer: {
-        type: Schema.Types.ObjectId,
-        ref: 'Company'
+        type: String,
+        required: true
       },
       position: String,
       startDate: Date,
@@ -43,21 +60,17 @@ const alumniSchema = mongoose.Schema({
     }
   ],
   currentLocation: {
-    type: Schema.Types.ObjectId,
-    ref: 'Location'
+    type: locationSchema,
   },
   homeTown: {
-    type: Schema.Types.ObjectId,
-    ref: 'Location'
+    type: locationSchema,
   },
   contactInfo: {
     phoneNumber: {
       type: String,
-      required: true
     },
     email: {
       type: String,
-      required: true
     }
   },
 })
