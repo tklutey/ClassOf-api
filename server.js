@@ -15,6 +15,9 @@ mongoose.connect(config.DB_URI, function (err) {
     }
 });
 
+/**
+ * @Connor: This is where express is routing to your functions
+ */
 app.route('/company')
     .get(company.getCompany)
     .post(company.postCompany)
