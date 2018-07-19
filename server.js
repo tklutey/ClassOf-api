@@ -2,11 +2,15 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const mongoose = require('mongoose');
-const config = require('./config/test.json')
 const company = require('./routes/company');
 const alumni = require('./routes/alumni');
 const port = process.env.PORT || 5000;
-const DB_URI = config.DB_URI || process.env.DATABASE_URL;
+
+var DB_URI = process.env.DATABASE_URL;
+if (process.env.NODE_ENV == "test") {
+    const config = require('./config/test.json')
+    DB_URI = config.DB_URI;
+}
 
 mongoose.connect(DB_URI, function (err) {
     if (err) {
