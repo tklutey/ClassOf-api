@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('./config/test.json')
 const company = require('./routes/company');
 const alumni = require('./routes/alumni');
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 mongoose.connect(config.DB_URI, function (err) {
     if (err) {
