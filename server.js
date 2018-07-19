@@ -6,8 +6,9 @@ const config = require('./config/test.json')
 const company = require('./routes/company');
 const alumni = require('./routes/alumni');
 const port = process.env.PORT || 5000;
+const DB_URI = config.DB_URI || process.env.DATABASE_URL;
 
-mongoose.connect(config.DB_URI, function (err) {
+mongoose.connect(DB_URI, function (err) {
     if (err) {
         console.log('Error on connection to DB: ' + err);
     } else {
