@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
-app.use(express.json());
+const cors = require('cors');
 const mongoose = require('mongoose');
-const company = require('./routes/company');
 const alumni = require('./routes/alumni');
 const port = process.env.PORT || 5000;
+
+app.use(express.json());
+app.use(cors());
 
 var DB_URI = process.env.DATABASE_URL;
 if (process.env.NODE_ENV == "test") {
@@ -20,14 +22,13 @@ mongoose.connect(DB_URI, function (err) {
     }
 });
 
-app.route('/company')
-    .get(company.getCompany)
-    .post(company.postCompany)
-
 app.route('/alumni')
     .get(alumni.getAlumni)
     .post(alumni.postAlumni)
     .delete(alumni.deleteAllAlumni)
+
+app.route('/search')
+    .get(alumni.searchAlumni)
 
 app.route
 

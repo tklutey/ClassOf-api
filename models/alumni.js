@@ -17,14 +17,12 @@ var locationSchema = mongoose.Schema({
 
 const alumniSchema = mongoose.Schema({
   firstName: {
-    type: [String],
-    required: true,
-    index: true
+    type: String,
+    required: true
   },
   lastName: {
-    type: [String],
-    required: true,
-    index: true
+    type: String,
+    required: true
   },
   classYear: {
     type: Number,
@@ -75,4 +73,8 @@ const alumniSchema = mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('Alumni', alumniSchema);
+alumniSchema.index({firstName: 'text', lastName: 'text'})
+var Alumni = mongoose.model('Alumni', alumniSchema);
+
+
+module.exports = Alumni;

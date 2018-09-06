@@ -1,6 +1,8 @@
 const Alumni = require('../models/alumni');
 
 function postAlumni(req, res) {
+    console.log(req.body);
+    console.log('post request');
     const {
         firstName,
         lastName,
@@ -56,6 +58,26 @@ function getAlumni(req, res) {
     })
 }
 
+function searchAlumni(req, res) {
+    Alumni.find(
+        { $text : { $search : req.query.query }}, 
+        { score : { $meta: "textScore" }} 
+    )
+    .sort({ score : { $meta : 'textScore' } })
+    .then(results => {
+        res.json({
+            success: true,
+            results: results
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.json({
+            success: false
+        })
+    });
+}
+
 function deleteAllAlumni(req, res) {
     Alumni.deleteOne({}, function (err, docs) {
         if (err) {
@@ -73,12 +95,11 @@ function deleteAllAlumni(req, res) {
     })
 }
 
-function searchAlumni(req, res) {
 
-}
 
 module.exports = {
     postAlumni,
     getAlumni,
-    deleteAllAlumni
+    deleteAllAlumni,
+    searchAlumni
 };
